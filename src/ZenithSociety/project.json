@@ -87,6 +87,7 @@
       "**/*.cshtml",
       "appsettings.json",
       "appsettings.Production.json",
+      "appsettings.Development.json",
       "web.config",
       "project.json",
       "project.*.json"
