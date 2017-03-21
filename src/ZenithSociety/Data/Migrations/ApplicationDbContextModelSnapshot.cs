@@ -5,13 +5,12 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using ZenithSociety.Data;
 
-namespace ZenithSociety.Migrations
+namespace ZenithSociety.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170321165244_FirstMigration")]
-    partial class FirstMigration
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1");
