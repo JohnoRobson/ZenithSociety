@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ZenithSociety.Data.Migrations
+namespace ZenithSociety.Migrations
 {
     public partial class FirstMigration1 : Migration
     {
