@@ -22,10 +22,13 @@ namespace ZenithSociety
 
         public Startup(IHostingEnvironment env)
         {
+            Console.WriteLine("Content root path = " + env.ContentRootPath);
+            Console.WriteLine("App base path = " + Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationBasePath);
+            Console.WriteLine("Current dir = " + System.IO.Directory.GetCurrentDirectory());
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: false)
                 .AddEnvironmentVariables();
 
             if (env.IsDevelopment())
@@ -45,8 +48,10 @@ namespace ZenithSociety
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            /*services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));*/
+            var con = Configuration["DefaultConnection"];
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(con));
            /* if (_env.IsDevelopment()) {
                 services.AddDbContext<ApplicationDbContext>(options =>
                   options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
