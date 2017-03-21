@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using ZenithSociety.Data;
 using ZenithSociety.Models;
 using ZenithSociety.Services;
+using Microsoft.DotNet.InternalAbstractions;
 
 namespace ZenithSociety
 {
@@ -45,8 +46,16 @@ namespace ZenithSociety
             // Add framework services.
             //services.AddDbContext<ApplicationDbContext>(options =>
             //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDbContext<ApplicationDbContext>(options =>
-               options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            if (_env.IsDevelopment()) {
+                services.AddDbContext<ApplicationDbContext>(options =>
+                  options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            }
+            else {
+                services.AddDbContext<ApplicationDbContext>(options =>
+                  options.UseSqlite(Configuration.GetConnectionString("c:/git/ZenithSociety/src/ZenithSociety/bin/Debug/netcoreapp1.0/zenith-db.sqlite")));
+            }
+           
+            //System.Diagnostics.Debug.WriteLine("asdsadasdasdasdasdasd" + ApplicationEnvironment.ApplicationBasePath + "zenith-db.sqlite");
 
             //var connection = Configuration["Data:DefaultConnection:ConnectionString"];
             //var connection = $"Data Source={_env.ContentRootPath}/data.db";

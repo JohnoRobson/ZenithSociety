@@ -8,10 +8,9 @@ using ZenithSociety.Data;
 namespace ZenithSociety.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170321181817_FirstMigration1")]
-    partial class FirstMigration1
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1");
