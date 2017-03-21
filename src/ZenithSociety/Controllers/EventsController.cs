@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ZenithSociety.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class EventsController : Controller
     {
         private readonly ApplicationDbContext _context;

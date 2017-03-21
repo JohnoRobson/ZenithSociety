@@ -45,11 +45,13 @@ namespace ZenithSociety
             // Add framework services.
             //services.AddDbContext<ApplicationDbContext>(options =>
             //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options =>
+               options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
             //var connection = Configuration["Data:DefaultConnection:ConnectionString"];
             //var connection = $"Data Source={_env.ContentRootPath}/data.db";
-            var connection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connection));
+            //var connection = Configuration.GetConnectionString("DefaultConnection");
+            //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connection));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
