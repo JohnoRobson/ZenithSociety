@@ -17,6 +17,8 @@ namespace ZenithSociety
 {
     public class Startup
     {
+        private IHostingEnvironment _env;
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -32,6 +34,7 @@ namespace ZenithSociety
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+            _env = env;
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -40,11 +43,12 @@ namespace ZenithSociety
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            /*services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));*/
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            var connection = Configuration["Data:DefaultConnection:ConnectionString"];
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connection));
+            //var connection = Configuration["Data:DefaultConnection:ConnectionString"];
+            //var connection = $"Data Source={_env.ContentRootPath}/data.db";
+            //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connection));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
