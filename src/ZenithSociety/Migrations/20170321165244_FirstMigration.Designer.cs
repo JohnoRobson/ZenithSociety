@@ -8,8 +8,8 @@ using ZenithSociety.Data;
 namespace ZenithSociety.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170321171101_FirstMigration1")]
-    partial class FirstMigration1
+    [Migration("20170321165244_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
