@@ -8,7 +8,7 @@ using ZenithSociety.Data;
 namespace ZenithSociety.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170321214734_First")]
+    [Migration("20170322013014_First")]
     partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

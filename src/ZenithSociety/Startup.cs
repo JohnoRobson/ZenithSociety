@@ -22,9 +22,6 @@ namespace ZenithSociety
 
         public Startup(IHostingEnvironment env)
         {
-            Console.WriteLine("Content root path = " + env.ContentRootPath);
-            Console.WriteLine("App base path = " + Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationBasePath);
-            Console.WriteLine("Current dir = " + System.IO.Directory.GetCurrentDirectory());
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -48,33 +45,12 @@ namespace ZenithSociety
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            /*services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));*/
             var con = Configuration["DefaultConnection"];
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(con));
-           /* if (_env.IsDevelopment()) {
-                services.AddDbContext<ApplicationDbContext>(options =>
-                  options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-            }
-            else {
-                services.AddDbContext<ApplicationDbContext>(options =>
-                  options.UseSqlite(Configuration.GetConnectionString("c:/git/ZenithSociety/src/ZenithSociety/bin/Debug/netcoreapp1.0/zenith-db.sqlite")));
-            }*/
-           
-            //System.Diagnostics.Debug.WriteLine("asdsadasdasdasdasdasd" + ApplicationEnvironment.ApplicationBasePath + "zenith-db.sqlite");
-
-            //var connection = Configuration["Data:DefaultConnection:ConnectionString"];
-            //var connection = $"Data Source={_env.ContentRootPath}/data.db";
-            //var connection = Configuration.GetConnectionString("DefaultConnection");
-            //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connection));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-
-            /*var connection = Configuration["Data:DefaultConnection:ConnectionString"];
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connection));*/
-
 
             services.AddMvc();
 
