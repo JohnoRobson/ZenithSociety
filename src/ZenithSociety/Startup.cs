@@ -90,7 +90,7 @@ namespace ZenithSociety
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            SeedData.Initialize(context);
+            SeedData.Initialize(app.ApplicationServices, context);
         }
     }
 }

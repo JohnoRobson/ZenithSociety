@@ -25,5 +25,6 @@ namespace ZenithSociety.Data
         }
 
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
+        public DbSet<IdentityRole> Roles { get; set; }
     }
 }
