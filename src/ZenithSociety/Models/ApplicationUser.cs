@@ -17,7 +17,9 @@ namespace ZenithSociety.Models
         public string LastName { get; set; }
 
         [Required]
+        public override string UserName { get; set; }
 
         [Required]
+        public override string Email { get; set; }
     }
 }
