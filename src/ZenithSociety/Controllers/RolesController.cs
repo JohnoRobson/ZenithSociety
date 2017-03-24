@@ -26,13 +26,13 @@ namespace ZenithSociety.Controllers
             _roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
         }
 
-        // GET: Events
+        // GET: Roles
         public async Task<IActionResult> Index()
         {
             return View(_context.Roles.ToList());
         }
 
-        // GET: Events/Details/5
+        // GET: Roles/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -49,14 +49,14 @@ namespace ZenithSociety.Controllers
             return View(@event);
         }
 
-        // GET: Events/Create
+        // GET: Roles/Create
         public IActionResult Create()
         {
             ViewData["Id"] = new SelectList(_context.Roles, "Id", "Name");
             return View();
         }
 
-        // POST: Events/Create
+        // POST: Roles/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -73,7 +73,7 @@ namespace ZenithSociety.Controllers
             return View(@event);
         }
 
-        // GET: Events/Edit/5
+        // GET: Roles/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -103,7 +103,7 @@ namespace ZenithSociety.Controllers
             return View(@event);
         }
 
-        // POST: Events/Edit/5
+        // POST: Roles/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -118,6 +118,11 @@ namespace ZenithSociety.Controllers
 
             if (ModelState.IsValid)
             {
+                //Check if Admin account is being removed from the Admin Role
+                if (_context.Roles.Where(q => q.Name == "Admin").First().Id == id && !this.Request.Form["Users"].Any(a => a == _context.Users.Where(u => u.UserName == "a").First().Id)) {
+                    return RedirectToAction("Index");
+                }
+
                 try
                 {
                     List<IdentityUserRole<string>> roles = new List<IdentityUserRole<string>>();
@@ -153,7 +158,7 @@ namespace ZenithSociety.Controllers
             return View(@event);
         }
 
-        // GET: Events/Delete/5
+        // GET: Roles/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -170,11 +175,16 @@ namespace ZenithSociety.Controllers
             return View(@event);
         }
 
-        // POST: Events/Delete/5
+        // POST: Roles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
+            //Check if role being deleted is the Admin role
+            if (_context.Roles.Where(q => q.Name == "Admin").First().Id == id) {
+                return RedirectToAction("Index");
+            }
+
             var @event = await _context.Roles.SingleOrDefaultAsync(m => m.Id == id);
             _context.Roles.Remove(@event);
             await _context.SaveChangesAsync();
