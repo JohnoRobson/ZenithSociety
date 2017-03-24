@@ -1,4 +1,4 @@
-@model ZenithSociety.Models.Event
+@model Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole
 
 @{
     ViewData["Title"] = "Edit";
@@ -8,52 +8,14 @@
 
 <form asp-action="Edit">
     <div class="form-horizontal">
-        <h4>Event</h4>
+        <h4>Role</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="EventId" />
+    <input type="hidden" asp-for="Id" />
         <div class="form-group">
-            <label asp-for="ActivityId" class="control-label col-md-2"></label>
-            <div class="col-md-10">
-                <select asp-for="ActivityId" class="form-control" asp-items="ViewBag.ActivityId"></select>
-                <span asp-validation-for="ActivityId" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="CreationDate" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="CreationDate" class="form-control" />
-                <span asp-validation-for="CreationDate" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="EnteredByUsername" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="EnteredByUsername" class="form-control" />
-                <span asp-validation-for="EnteredByUsername" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="EventFromDate" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="EventFromDate" class="form-control" />
-                <span asp-validation-for="EventFromDate" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="EventToDate" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="EventToDate" class="form-control" />
-                <span asp-validation-for="EventToDate" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <div class="checkbox">
-                    <input asp-for="IsActive" />
-                    <label asp-for="IsActive"></label>
-                </div>
-            </div>
+            <h4>Users in this role</h4>
+            @Html.LabelFor(m => m.Users)
+            @Html.ListBox("Users")
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
