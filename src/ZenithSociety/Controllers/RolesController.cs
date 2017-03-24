@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using ZenithSociety.Data;
 using ZenithSociety.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace ZenithSociety.Controllers
 {
@@ -15,10 +18,12 @@ namespace ZenithSociety.Controllers
     public class RolesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public RolesController(ApplicationDbContext context)
+        public RolesController(ApplicationDbContext context, IServiceProvider serviceProvider)
         {
-            _context = context;    
+            _context = context;
+            _roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
         }
 
         // GET: Events
@@ -56,34 +61,45 @@ namespace ZenithSociety.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name, NormalizedName")] Event @event)
+        public async Task<IActionResult> Create([Bind("Name")] IdentityRole @event)
         {
-            @event.CreationDate = DateTime.Today;
-            @event.EnteredByUsername = User.Identity.Name;
             if (ModelState.IsValid)
             {
-                _context.Add(@event);
-                await _context.SaveChangesAsync();
+                //_context.Add(@event);
+                await _roleManager.CreateAsync(new IdentityRole(@event.Name));
                 return RedirectToAction("Index");
             }
-            ViewData["ActivityId"] = new SelectList(_context.Activities, "ActivityId", "ActivityDescription", @event.ActivityId);
+            ViewData["Id"] = new SelectList(_context.Roles, "Id", "Name", @event.Id);
             return View(@event);
         }
 
         // GET: Events/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var @event = await _context.Events.SingleOrDefaultAsync(m => m.EventId == id);
+            var @event = await _context.Roles.SingleOrDefaultAsync(m => m.Id == id);
             if (@event == null)
             {
                 return NotFound();
             }
-            ViewData["ActivityId"] = new SelectList(_context.Activities, "ActivityId", "ActivityDescription", @event.ActivityId);
+
+            var selectedUserList = _context.Users.Where(u => u.Roles.Any(r => r.RoleId == @event.Id));
+            var userList = _context.Users;
+
+            MultiSelectList selectList = new MultiSelectList(userList, "Id", "UserName");
+
+            foreach (SelectListItem item in selectList) {
+                if (selectedUserList.Any(s => s.Id == item.Value)) {
+                    item.Selected = true;
+                }
+            }
+
+            ViewData["Id"] = new SelectList(_context.Roles, "Id", "Name", @event.Id);
+            ViewData["Users"] = selectList;
             return View(@event);
         }
 
@@ -92,9 +108,10 @@ namespace ZenithSociety.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EventId,ActivityId,CreationDate,EnteredByUsername,EventFromDate,EventToDate,IsActive,Activity")] Event @event)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Users,Roles")] IdentityRole @event)
         {
-            if (id != @event.EventId)
+            
+            if (id != @event.Id)
             {
                 return NotFound();
             }
@@ -103,12 +120,25 @@ namespace ZenithSociety.Controllers
             {
                 try
                 {
-                    _context.Update(@event);
+                    List<IdentityUserRole<string>> roles = new List<IdentityUserRole<string>>();
+                    _context.UserRoles.RemoveRange(_context.UserRoles.Where(u => u.RoleId == @event.Id));
+                    await _context.SaveChangesAsync();
+
+                    foreach (string r in this.Request.Form["Users"]) {
+                        IdentityUserRole<string> i = new IdentityUserRole<string>();
+                        i.RoleId = @event.Id;
+                        i.UserId = r;
+                        if (!_context.UserRoles.Any(q => q.RoleId == i.RoleId && q.UserId == i.UserId)) {
+                            _context.UserRoles.Add(i);
+                        }
+                        
+                    }
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EventExists(@event.EventId))
+                    if (!EventExists(id))
                     {
                         return NotFound();
                     }
@@ -119,19 +149,19 @@ namespace ZenithSociety.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["ActivityId"] = new SelectList(_context.Activities, "ActivityId", "ActivityDescription", @event.ActivityId);
+            ViewData["Id"] = new SelectList(_context.Roles, "Id", "Name", @event.Id);
             return View(@event);
         }
 
         // GET: Events/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var @event = await _context.Events.SingleOrDefaultAsync(m => m.EventId == id);
+            var @event = await _context.Roles.SingleOrDefaultAsync(m => m.Id == id);
             if (@event == null)
             {
                 return NotFound();
@@ -143,17 +173,17 @@ namespace ZenithSociety.Controllers
         // POST: Events/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var @event = await _context.Events.SingleOrDefaultAsync(m => m.EventId == id);
-            _context.Events.Remove(@event);
+            var @event = await _context.Roles.SingleOrDefaultAsync(m => m.Id == id);
+            _context.Roles.Remove(@event);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
-        private bool EventExists(int id)
+        private bool EventExists(string id)
         {
-            return _context.Events.Any(e => e.EventId == id);
+            return _context.Roles.Any(e => e.Id == id);
         }
     }
 }
