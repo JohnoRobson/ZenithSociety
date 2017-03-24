@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ZenithSociety.Models {
-    public class Event {
+    public class Event : IValidatableObject {
         [Key]
         [Display(Name = "Event")]
         public int EventId { get; set; }
@@ -18,6 +18,14 @@ namespace ZenithSociety.Models {
         [Display(Name = "End Date")]
         [Required]
         public DateTime EventToDate { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) {
+            if (EventToDate < EventFromDate) {
+                yield return
+                  new ValidationResult(errorMessage: "End Date must be greater than Start Date",
+                                       memberNames: new[] { "EventToDate" });
+            }
+        }
 
         [Display(Name = "Created By")]
         public string EnteredByUsername { get; set; }

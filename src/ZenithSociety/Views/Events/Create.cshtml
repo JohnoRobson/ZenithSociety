@@ -17,6 +17,9 @@
                 <select asp-for="ActivityId" class ="form-control" asp-items="ViewBag.ActivityId"></select>
             </div>
         </div>
+        <div>
+            <h5>Write dates in this form: 2016-01-01 (year-month-day)</h5>
+        </div>
         <div class="form-group">
             <label asp-for="EventFromDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -29,6 +32,7 @@
             <div class="col-md-10">
                 <input asp-for="EventToDate" class="form-control" />
                 <span asp-validation-for="EventToDate" class="text-danger" />
+                @Html.ValidationMessageFor(model => model.EventToDate)
             </div>
         </div>
         <div class="form-group">
