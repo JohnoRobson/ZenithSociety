@@ -12,11 +12,11 @@ using Microsoft.AspNetCore.Authorization;
 namespace ZenithSociety.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class EventsController : Controller
+    public class RolesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public EventsController(ApplicationDbContext context)
+        public RolesController(ApplicationDbContext context)
         {
             _context = context;    
         }
@@ -24,20 +24,18 @@ namespace ZenithSociety.Controllers
         // GET: Events
         public async Task<IActionResult> Index()
         {
-            //var applicationDbContext = _context.Events.Include(@ => @.Activity);
-            //return View(await applicationDbContext.ToListAsync());
-            return View(_context.Events.ToList());
+            return View(_context.Roles.ToList());
         }
 
         // GET: Events/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var @event = await _context.Events.SingleOrDefaultAsync(m => m.EventId == id);
+            var @event = await _context.Roles.SingleOrDefaultAsync(m => m.Id == id);
             if (@event == null)
             {
                 return NotFound();
@@ -49,7 +47,7 @@ namespace ZenithSociety.Controllers
         // GET: Events/Create
         public IActionResult Create()
         {
-            ViewData["ActivityId"] = new SelectList(_context.Activities, "ActivityId", "ActivityDescription");
+            ViewData["Id"] = new SelectList(_context.Roles, "Id", "Name");
             return View();
         }
 
@@ -58,7 +56,7 @@ namespace ZenithSociety.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EventId,ActivityId,CreationDate,EnteredByUsername,EventFromDate,EventToDate,IsActive,Activity")] Event @event)
+        public async Task<IActionResult> Create([Bind("Name, NormalizedName")] Event @event)
         {
             @event.CreationDate = DateTime.Today;
             @event.EnteredByUsername = User.Identity.Name;

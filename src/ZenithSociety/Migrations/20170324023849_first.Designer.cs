@@ -8,7 +8,7 @@ using ZenithSociety.Data;
 namespace ZenithSociety.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170322211842_first")]
+    [Migration("20170324023849_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -151,6 +151,10 @@ namespace ZenithSociety.Migrations
                         .HasAnnotation("MaxLength", 256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
 
                     b.Property<bool>("LockoutEnabled");
 

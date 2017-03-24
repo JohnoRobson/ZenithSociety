@@ -11,16 +11,6 @@ namespace ZenithSociety.Models
 {
     public class SeedData {
 
-        /*static UserManager<ApplicationUser> _userManager;
-        static IServiceProvider _serviceProvider;
-        static ApplicationDbContext _db;
-
-        public SeedData(UserManager<ApplicationUser> userManager, IServiceProvider serviceProvider, ApplicationDbContext db) {
-            _userManager = userManager;
-            _serviceProvider = serviceProvider;
-            _db = db;
-        }*/
-
         public async static void Initialize(IServiceProvider serviceProvider, ApplicationDbContext db) {
             await AddRoles(serviceProvider);
             await AddUsers(serviceProvider);
@@ -263,7 +253,7 @@ namespace ZenithSociety.Models
             //var roleStore = new RoleStore<IdentityRole>(_db);
 
 
-            string[] roles = new string[] { "User", "Admin" };
+            string[] roles = new string[] { "Member", "Admin" };
 
             foreach (string role in roles) {
                 /*if  (!_db.Roles.Any(r => r.Name == role)) {
@@ -282,8 +272,8 @@ namespace ZenithSociety.Models
             var _db = serviceProvider.GetService<ApplicationDbContext>();
             var _userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
 
-            ApplicationUser admin  = new ApplicationUser() { Email = "a@a.a", UserName = "a" };
-            ApplicationUser member = new ApplicationUser() { Email = "m@m.m", UserName = "m" };
+            ApplicationUser admin  = new ApplicationUser() { Email = "a@a.a", UserName = "a", FirstName = "a", LastName = "a" };
+            ApplicationUser member = new ApplicationUser() { Email = "m@m.m", UserName = "m", FirstName = "m", LastName = "m" };
 
             /*List<ApplicationUser> list = new List<ApplicationUser>();
             list.Add(admin);
@@ -305,7 +295,8 @@ namespace ZenithSociety.Models
             _db.SaveChanges();
 
             await _userManager.AddToRoleAsync(_db.Users.Where(u => u.UserName == "a").FirstOrDefault(), "Admin");
-            await _userManager.AddToRoleAsync(_db.Users.Where(u => u.UserName == "m").FirstOrDefault(), "User");
+            await _userManager.AddToRoleAsync(_db.Users.Where(u => u.UserName == "a").FirstOrDefault(), "Member");
+            await _userManager.AddToRoleAsync(_db.Users.Where(u => u.UserName == "m").FirstOrDefault(), "Member");
             _db.SaveChanges();
         }
     }

@@ -13,7 +13,7 @@ using ZenithSociety.Services;
 namespace ZenithSociety.Controllers
 {
     //[Authorize]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class ManageController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
