@@ -25,7 +25,7 @@
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Add users to group</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" hidden="@(item.Name == "Admin")">Delete</a>
             </td>
         </tr>
 }

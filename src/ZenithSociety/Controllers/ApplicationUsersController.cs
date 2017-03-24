@@ -43,15 +43,15 @@ namespace ZenithSociety.Controllers
         }
 
         // GET: ApplicationUsers/Create
-        public IActionResult Create()
+        /*public IActionResult Create()
         {
             return View();
-        }
+        }*/
 
         // POST: ApplicationUsers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        /*[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,AccessFailedCount,ConcurrencyStamp,Email,EmailConfirmed,FirstName,LastName,LockoutEnabled,LockoutEnd,NormalizedEmail,NormalizedUserName,PasswordHash,PhoneNumber,PhoneNumberConfirmed,SecurityStamp,TwoFactorEnabled,UserName")] ApplicationUser applicationUser)
         {
@@ -62,7 +62,7 @@ namespace ZenithSociety.Controllers
                 return RedirectToAction("Index");
             }
             return View(applicationUser);
-        }
+        }*/
 
         // GET: ApplicationUsers/Edit/5
         public async Task<IActionResult> Edit(string id)
@@ -137,6 +137,9 @@ namespace ZenithSociety.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
+            if (id == _context.Users.Where(u => u.UserName == "a").First().Id) {
+                return RedirectToAction("Index");
+            }
             var applicationUser = await _context.ApplicationUser.SingleOrDefaultAsync(m => m.Id == id);
             _context.ApplicationUser.Remove(applicationUser);
             await _context.SaveChangesAsync();
