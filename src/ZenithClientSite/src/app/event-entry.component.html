@@ -1,0 +1,6 @@
+<tr>{{entry.date | date: 'EEEE MMMM d, y'}}</tr>
+<tr></tr>
+<tr *ngFor="let event of entry.events">
+    <td>{{event.eventFromDate | date: 'hh:mm:a'}} - {{event.eventToDate | date: 'hh:mm:a'}}</td>
+    <td>{{event.activity}}</td>
+</tr>

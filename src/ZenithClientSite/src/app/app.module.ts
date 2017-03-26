@@ -2,19 +2,44 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { EventService } from './event.service';
+import { EventViewComponent } from './event-view.component';
+import { EventEntryComponent } from './event-entry.component';
+import { LoginComponent } from './login.component';
+import { RegisterComponent } from './register.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EventViewComponent,
+    EventEntryComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot([
+    {
+      path: '', redirectTo: '/events', pathMatch: 'full'
+    },
+    {
+      path: 'events', component: EventViewComponent
+    },
+    {
+      path: 'login', component: LoginComponent
+    },
+    {
+      path: 'register', component: RegisterComponent
+    }
+  ])
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [ EventService ],
+  bootstrap: [ AppComponent ],
 })
+
 export class AppModule { }
