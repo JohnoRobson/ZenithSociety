@@ -35,6 +35,9 @@ import { RegisterComponent } from './register.component';
     },
     {
       path: 'register', component: RegisterComponent
+    },
+    {
+      path: 'events/:id', component: EventViewComponent
     }
   ])
   ],

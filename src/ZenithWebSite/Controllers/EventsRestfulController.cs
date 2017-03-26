@@ -13,7 +13,7 @@ namespace ZenithSociety.Controllers
 {
     [Produces("application/json")]
     [Route("api/Events")]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class EventsRestfulController : Controller
     {
         private readonly ApplicationDbContext _context;

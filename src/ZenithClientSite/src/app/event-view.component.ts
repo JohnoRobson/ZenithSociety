@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 
 import { Event } from './event';
 import { EventService } from './event.service';
@@ -10,12 +11,15 @@ import { EventEntry } from './event-entry';
   styleUrls: ['./event-view.component.css']
 })
 
-export class EventViewComponent {
+export class EventViewComponent implements OnInit {
     events: Event[];
     dates: Date[];
     entries: EventEntry[];
+    id: number;
+    nextId: number;
+    previousId: number;
 
-    constructor(private eventservice: EventService) {}
+    constructor(private eventservice: EventService, private route: ActivatedRoute) {}
     
     getEvents(): void {
         this.eventservice.getEvents().then(events => this.events = events).then(e => this.getUniqueDatesForWeek(e));
@@ -33,8 +37,13 @@ export class EventViewComponent {
 
     generateEntries(): void {
         this.entries = [];
+
+        console.log(this.getStartOfWeek().getDate());
         this.dates.forEach(date => {
-            this.entries.push(new EventEntry(date, this.getActivitiesInDay(date)));
+            if (date.getTime() >= this.changeDateBy(this.getStartOfWeek(), (this.id * 7) - 1).getTime()
+             && date.getTime() < this.changeDateBy(this.getEndOfWeek(), (this.id * 7)).getTime()) {
+                this.entries.push(new EventEntry(date, this.getActivitiesInDay(date)));
+             }
         });
     }
 
@@ -54,7 +63,32 @@ export class EventViewComponent {
         return s;
     }
 
+    changeDateBy(date: Date, days: number): Date {
+        date.setDate(date.getDate() + days);
+        return date;
+    }
+
+    getStartOfWeek(): Date {
+        var date = new Date();
+        var curDay = date.getDay();
+        var diff = date.getDate() - curDay + (curDay == 0 ? -6:1);
+        return new Date(date.setDate(diff));
+    }
+
+    getEndOfWeek(): Date {
+        return this.changeDateBy(this.getStartOfWeek(), 6);
+    }
+
     ngOnInit(): void {
+        this.route.params
+        .subscribe(param => {
+            this.id = param['id'];
+            if (this.id == undefined) {
+                this.id = 0;
+            }
+            this.nextId = (this.id - 1);
+            this.previousId = (Number(this.id) + 1);
+        });
         this.getEvents();
     }
 }
