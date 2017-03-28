@@ -8,12 +8,14 @@ using Microsoft.EntityFrameworkCore;
 using ZenithSociety.Data;
 using ZenithSociety.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 
 namespace ZenithSociety.Controllers
 {
     [Produces("application/json")]
     [Route("api/Events")]
-    [Authorize(Roles = "Admin")]
+    [EnableCors("AllowAllOrigins")]
+    //[Authorize(Roles = "Admin")]
     public class EventsRestfulController : Controller
     {
         private readonly ApplicationDbContext _context;

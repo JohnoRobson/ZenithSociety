@@ -11,10 +11,12 @@ using Microsoft.Extensions.Logging;
 using ZenithSociety.Models;
 using ZenithSociety.Models.AccountViewModels;
 using ZenithSociety.Services;
+using Microsoft.AspNetCore.Cors;
 
 namespace ZenithSociety.Controllers
 {
     [Authorize]
+    [EnableCors("AllowAllOrigins")]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

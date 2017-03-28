@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ZenithWebSite", "src\ZenithSociety\ZenithWebSite.xproj", "{E1F33BEE-A4CE-4D4E-A592-8A86D4E6CF9B}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ZenithWebSite", "src\ZenithWebSite\ZenithWebSite.xproj", "{E1F33BEE-A4CE-4D4E-A592-8A86D4E6CF9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

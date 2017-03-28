@@ -1,4 +1,4 @@
-﻿{
+{
   "userSecretsId": "aspnet-ZenithSociety-02d90caa-895b-417d-a106-9c5a1ea0e0bd",
 
   "dependencies": {
@@ -44,7 +44,14 @@
       "version": "1.0.0-preview2-final",
       "type": "build"
     },
-    "Microsoft.EntityFrameworkCore.Sqlite": "1.0.1"
+    "System.Xml.XDocument": "4.3.0",
+    "Microsoft.AspNetCore.Identity": "1.0.0",
+    "AspNet.Security.OAuth.Validation": "1.0.0-*",
+    "OpenIddict": "1.0.0-*",
+    "OpenIddict.EntityFrameworkCore": "1.0.0-*",
+    "OpenIddict.Mvc": "1.0.0-*",
+    "Microsoft.EntityFrameworkCore.Sqlite": "1.0.1",
+    "Microsoft.AspNetCore.Cors": "1.1.1"
   },
 
   "tools": {
@@ -60,7 +67,6 @@
       ]
     }
   },
-
   "frameworks": {
     "netcoreapp1.0": {
       "imports": [

@@ -1,0 +1,11 @@
+<h2>Login</h2>
+<form (ngSubmit)="onSubmit()" [hidden]="tokenService.isLoggedIn()">
+    <label>Username: </label>
+    <input type="text"  [(ngModel)]="username" placeholder="Enter Username" name="username" required />
+    <br />
+    <label>Password: </label>
+    <input type="text" [(ngModel)]="password" placeholder="Enter Password" name="password" required />
+    <br />
+    <button type="submit" >Login</button>
+</form>
+<h1 [hidden]="!tokenService.isLoggedIn()">You are logged in</h1>

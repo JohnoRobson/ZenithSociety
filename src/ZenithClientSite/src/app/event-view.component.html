@@ -1,0 +1,7 @@
+<table>
+    <tr *ngFor="let entry of entries">
+        <event-entry [entry]="entry"></event-entry>
+    </tr>
+</table>
+<a href="/events/{{nextId}}" routerLinkActive="active" [hidden]="!isLoggedIn"> < </a>
+<a href="/events/{{previousId}}" routerLinkActive="active" [hidden]="!isLoggedIn"> > </a>
