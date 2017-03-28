@@ -4,6 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Event } from './event';
 import { EventService } from './event.service';
 import { EventEntry } from './event-entry';
+import { TokenService } from './token.service';
 
 @Component({
   selector: 'event-view',
@@ -18,8 +19,9 @@ export class EventViewComponent implements OnInit {
     id: number;
     nextId: number;
     previousId: number;
+    isLoggedIn: boolean;
 
-    constructor(private eventservice: EventService, private route: ActivatedRoute) {}
+    constructor(private eventservice: EventService, private route: ActivatedRoute, private tokenService: TokenService) {}
     
     getEvents(): void {
         this.eventservice.getEvents().then(events => this.events = events).then(e => { this.getUniqueDatesForWeek(e)});
@@ -86,6 +88,9 @@ export class EventViewComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.isLoggedIn = this.tokenService.isLoggedIn();
+        console.log("event view init");
+        console.log(this.isLoggedIn);
         this.route.params
         .subscribe(param => {
             this.id = param['id'];

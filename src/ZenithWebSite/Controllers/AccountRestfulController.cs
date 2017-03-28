@@ -8,14 +8,25 @@ using Microsoft.EntityFrameworkCore;
 using ZenithSociety.Data;
 using ZenithSociety.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
+using ZenithSociety.Models.AccountViewModels;
+using Microsoft.AspNetCore.Identity;
+using ZenithSociety.Services;
+using Microsoft.Extensions.Logging;
 
 namespace ZenithSociety.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Activities")] 
+    [Route("api/Account")]
+    [EnableCors("AllowAllOrigins")]
     public class AccountRestfulController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IEmailSender _emailSender;
+        private readonly ISmsSender _smsSender;
+        private readonly ILogger _logger;
 
         public AccountRestfulController(ApplicationDbContext context)
         {
@@ -83,33 +94,28 @@ namespace ZenithSociety.Controllers
             return NoContent();
         }
 
-        // POST: api/Activities
+        // POST: api/Account
         [HttpPost]
-        public async Task<IActionResult> PostActivity([FromBody] Activity activity)
+        public async Task<IActionResult> PostActivity([FromBody] LoginViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
+            var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, lockoutOnFailure: false);
+            if (result.Succeeded) {
+                _logger.LogInformation(1, "User logged in.");
                 return BadRequest(ModelState);
             }
-
-            _context.Activities.Add(activity);
-            try
-            {
-                await _context.SaveChangesAsync();
+            /*if (result.RequiresTwoFactor) {
+                return RedirectToAction(nameof(SendCode), new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+            }*/
+            if (result.IsLockedOut) {
+                _logger.LogWarning(2, "User account locked out.");
+                return View("Lockout");
             }
-            catch (DbUpdateException)
-            {
-                if (ActivityExists(activity.ActivityId))
-                {
-                    return new StatusCodeResult(StatusCodes.Status409Conflict);
-                }
-                else
-                {
-                    throw;
-                }
+            else {
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                return View(model);
             }
 
-            return CreatedAtAction("GetActivity", new { id = activity.ActivityId }, activity);
+            return View(model);
         }
 
         // DELETE: api/Activities/5

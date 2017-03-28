@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { Event } from './event';
 import { EventEntry } from './event-entry';
+import { TokenService } from './token.service';
 
 @Component({
   selector: 'event-entry',
@@ -9,6 +10,7 @@ import { EventEntry } from './event-entry';
 })
 
 export class EventEntryComponent {
+    constructor(private tokenService: TokenService) {}
     @Input() entry: EventEntry;
     //events = this.entry.events;
 }

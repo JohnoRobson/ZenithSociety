@@ -10,6 +10,7 @@ import { EventViewComponent } from './event-view.component';
 import { EventEntryComponent } from './event-entry.component';
 import { LoginComponent } from './login.component';
 import { RegisterComponent } from './register.component';
+import { TokenService } from './token.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { RegisterComponent } from './register.component';
     }
   ])
   ],
-  providers: [ EventService ],
+  providers: [ EventService, TokenService ],
   bootstrap: [ AppComponent ],
 })
 

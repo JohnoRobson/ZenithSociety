@@ -44,6 +44,12 @@
       "version": "1.0.0-preview2-final",
       "type": "build"
     },
+    "System.Xml.XDocument": "4.3.0",
+    "Microsoft.AspNetCore.Identity": "1.0.0",
+    "AspNet.Security.OAuth.Validation": "1.0.0-*",
+    "OpenIddict": "1.0.0-*",
+    "OpenIddict.EntityFrameworkCore": "1.0.0-*",
+    "OpenIddict.Mvc": "1.0.0-*",
     "Microsoft.EntityFrameworkCore.Sqlite": "1.0.1",
     "Microsoft.AspNetCore.Cors": "1.1.1"
   },
@@ -61,7 +67,6 @@
       ]
     }
   },
-
   "frameworks": {
     "netcoreapp1.0": {
       "imports": [

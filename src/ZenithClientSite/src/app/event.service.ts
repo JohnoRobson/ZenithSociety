@@ -3,12 +3,13 @@ import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { Event } from './event';
-import { EVENTS } from './mock-events';
 
 @Injectable()
 export class EventService {
 
-    private URL = 'http://localhost:5000/api/events';  // URL to web api
+    private URL = 'http://zenith-society-nj-core.azurewebsites.net/api/events';  // URL to web api
+    //private URL = 'http://localhost:5000/api/events';
+
     constructor(private http: Http) { }
 
     getEvents(): Promise<Event[]> {

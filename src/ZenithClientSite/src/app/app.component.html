@@ -3,7 +3,8 @@
 </h1>
 <nav>
   <a routerLink="/events" routerLinkActive="active">Events</a>
-  <a routerLink="/login" routerLinkActive="active">Login</a>
+  <a [hidden]="tokenService.isLoggedIn()" routerLink="/login" routerLinkActive="active">Login</a>
   <a routerLink="/register" routerLinkActive="active">Register</a>
+  <a [hidden]="!tokenService.isLoggedIn()" routerLink="/login" routerLinkActive="active" (click)="logout()">Logout</a>
 </nav>
 <router-outlet></router-outlet>
