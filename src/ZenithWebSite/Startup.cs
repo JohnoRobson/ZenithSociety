@@ -53,6 +53,11 @@ namespace ZenithSociety
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder => builder.AllowAnyOrigin());
+            });
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -76,6 +81,8 @@ namespace ZenithSociety
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            //app.UseCors();
 
             app.UseStaticFiles();
 

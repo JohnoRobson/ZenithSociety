@@ -1,4 +1,4 @@
-﻿{
+{
   "userSecretsId": "aspnet-ZenithSociety-02d90caa-895b-417d-a106-9c5a1ea0e0bd",
 
   "dependencies": {
@@ -44,7 +44,8 @@
       "version": "1.0.0-preview2-final",
       "type": "build"
     },
-    "Microsoft.EntityFrameworkCore.Sqlite": "1.0.1"
+    "Microsoft.EntityFrameworkCore.Sqlite": "1.0.1",
+    "Microsoft.AspNetCore.Cors": "1.1.1"
   },
 
   "tools": {

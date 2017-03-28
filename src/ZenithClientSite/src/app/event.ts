@@ -3,7 +3,8 @@ export class Event {
     eventFromDate: Date;
     eventToDate: Date;
     enteredByUserName: string;
-    activity: string;
+    activityId: number;
+    activityName: string;
     creationDate: Date;
     isActive: boolean;
 }

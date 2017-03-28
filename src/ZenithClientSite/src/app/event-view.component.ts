@@ -22,11 +22,12 @@ export class EventViewComponent implements OnInit {
     constructor(private eventservice: EventService, private route: ActivatedRoute) {}
     
     getEvents(): void {
-        this.eventservice.getEvents().then(events => this.events = events).then(e => this.getUniqueDatesForWeek(e));
+        this.eventservice.getEvents().then(events => this.events = events).then(e => { this.getUniqueDatesForWeek(e)});
     }
 
     getUniqueDatesForWeek(events: Event[]): void {
         this.dates = [];
+        this.convertStringsToDates();
         events.forEach(event => {
             if (!this.dates.some(d => this.convertDate(d) === this.convertDate(event.eventFromDate))) {
                 this.dates.push(event.eventFromDate);
@@ -35,10 +36,15 @@ export class EventViewComponent implements OnInit {
         this.generateEntries();
     }
 
+    convertStringsToDates():void {
+        this.events.forEach(e => {e.creationDate = new Date(e.creationDate);
+                                    e.eventFromDate = new Date(e.eventFromDate);
+                                        e.eventToDate = new Date(e.eventToDate)});
+    }
+
     generateEntries(): void {
         this.entries = [];
 
-        console.log(this.getStartOfWeek().getDate());
         this.dates.forEach(date => {
             if (date.getTime() >= this.changeDateBy(this.getStartOfWeek(), (this.id * 7) - 1).getTime()
              && date.getTime() < this.changeDateBy(this.getEndOfWeek(), (this.id * 7)).getTime()) {

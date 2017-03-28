@@ -8,64 +8,61 @@ using Microsoft.EntityFrameworkCore;
 using ZenithSociety.Data;
 using ZenithSociety.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 
 namespace ZenithSociety.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Events")]
-    [EnableCors("AllowAllOrigins")]
-    //[Authorize(Roles = "Admin")]
-    public class EventsRestfulController : Controller
+    [Route("api/Activities")] 
+    public class AccountRestfulController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public EventsRestfulController(ApplicationDbContext context)
+        public AccountRestfulController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Events
+        // GET: api/Activities
         [HttpGet]
-        public IEnumerable<Event> GetEvents()
+        public IEnumerable<Activity> GetActivities()
         {
-            return _context.Events;
+            return _context.Activities;
         }
 
-        // GET: api/Events/5
+        // GET: api/Activities/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetEvent([FromRoute] int id)
+        public async Task<IActionResult> GetActivity([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            Event @event = await _context.Events.SingleOrDefaultAsync(m => m.EventId == id);
+            Activity activity = await _context.Activities.SingleOrDefaultAsync(m => m.ActivityId == id);
 
-            if (@event == null)
+            if (activity == null)
             {
                 return NotFound();
             }
 
-            return Ok(@event);
+            return Ok(activity);
         }
 
-        // PUT: api/Events/5
+        // PUT: api/Activities/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEvent([FromRoute] int id, [FromBody] Event @event)
+        public async Task<IActionResult> PutActivity([FromRoute] int id, [FromBody] Activity activity)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != @event.EventId)
+            if (id != activity.ActivityId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(@event).State = EntityState.Modified;
+            _context.Entry(activity).State = EntityState.Modified;
 
             try
             {
@@ -73,7 +70,7 @@ namespace ZenithSociety.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EventExists(id))
+                if (!ActivityExists(id))
                 {
                     return NotFound();
                 }
@@ -86,23 +83,23 @@ namespace ZenithSociety.Controllers
             return NoContent();
         }
 
-        // POST: api/Events
+        // POST: api/Activities
         [HttpPost]
-        public async Task<IActionResult> PostEvent([FromBody] Event @event)
+        public async Task<IActionResult> PostActivity([FromBody] Activity activity)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Events.Add(@event);
+            _context.Activities.Add(activity);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (EventExists(@event.EventId))
+                if (ActivityExists(activity.ActivityId))
                 {
                     return new StatusCodeResult(StatusCodes.Status409Conflict);
                 }
@@ -112,33 +109,33 @@ namespace ZenithSociety.Controllers
                 }
             }
 
-            return CreatedAtAction("GetEvent", new { id = @event.EventId }, @event);
+            return CreatedAtAction("GetActivity", new { id = activity.ActivityId }, activity);
         }
 
-        // DELETE: api/Events/5
+        // DELETE: api/Activities/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEvent([FromRoute] int id)
+        public async Task<IActionResult> DeleteActivity([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            Event @event = await _context.Events.SingleOrDefaultAsync(m => m.EventId == id);
-            if (@event == null)
+            Activity activity = await _context.Activities.SingleOrDefaultAsync(m => m.ActivityId == id);
+            if (activity == null)
             {
                 return NotFound();
             }
 
-            _context.Events.Remove(@event);
+            _context.Activities.Remove(activity);
             await _context.SaveChangesAsync();
 
-            return Ok(@event);
+            return Ok(activity);
         }
 
-        private bool EventExists(int id)
+        private bool ActivityExists(int id)
         {
-            return _context.Events.Any(e => e.EventId == id);
+            return _context.Activities.Any(e => e.ActivityId == id);
         }
     }
 }
