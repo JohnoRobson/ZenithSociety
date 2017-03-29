@@ -10,21 +10,20 @@ import { ActivityService } from './activity.service';
 export class EventService {
 
     private URL = 'http://zenith-society-nj-core.azurewebsites.net/api/events';  // URL to web api
-    private activities: Map<number, Activity>;
+    private activities: Map<number, Activity> = new Map<number, Activity>();
 
     constructor(private http: Http, private activityService: ActivityService) { }
 
     getEvents(): Promise<Event[]> {
         let events: Promise<Event[]> = this.http.get(this.URL)
                .toPromise()
-               .then(response => response.json() as Event[]).then()
+               .then(response => response.json() as Event[])
                .catch(this.handleError);
 
-        //this.activityService.getActivities().then(a => a.forEach(act => {this.activities.set(act.activityId, act)}));
-this.activityService.getActivities().then(a => console.log(a));
-        /*events.then(events => events.forEach(e => {
-            e.activityName = this.activities.get(e.activityId).activityDescription;
-        }));*/
+        this.activityService.getActivities().then(a => a.forEach(act => {this.activities.set(act.activityId, act)}))
+            .then(q => events.then(events => events.forEach(e => {
+                e.activityName = this.activities.get(e.activityId).activityDescription;
+            })));
 
         if (events == undefined) {
             
