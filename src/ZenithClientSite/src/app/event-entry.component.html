@@ -1,6 +1,6 @@
 <tr>{{entry.date | date: 'EEEE MMMM d, y'}}</tr>
 <tr></tr>
 <tr *ngFor="let event of entry.events">
-    <td [hidden]="!tokenService.isLoggedIn() && event.isActive">{{event.eventFromDate | date: 'hh:mm:a'}} - {{event.eventToDate | date: 'hh:mm:a'}}</td>
-    <td [hidden]="!tokenService.isLoggedIn() && entry.isActive">{{event.activityName}}</td>
+    <td [hidden]="!tokenService.isLoggedIn() && !event.isActive">{{event.eventFromDate | date: 'hh:mm:a'}} - {{event.eventToDate | date: 'hh:mm:a'}}</td>
+    <td [hidden]="!tokenService.isLoggedIn() && !entry.isActive">{{event.activityName}}</td>
 </tr>

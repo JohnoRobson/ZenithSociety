@@ -8,4 +8,11 @@ export class EventEntry {
         this.date = date;
         this.events = events;
     }
+
+    allAreInactive(): boolean {
+        this.events.forEach(e => {if (e.isActive) {
+            return false;
+        }})
+        return true;
+    }
 }

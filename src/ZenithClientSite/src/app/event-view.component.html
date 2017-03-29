@@ -1,6 +1,6 @@
 <table>
     <tr *ngFor="let entry of entries">
-        <event-entry [entry]="entry"></event-entry>
+        <event-entry [entry]="entry" [hidden]="entry.allAreInactive  && !isLoggedIn"></event-entry>
     </tr>
 </table>
 <a href="/events/{{nextId}}" routerLinkActive="active" [hidden]="!isLoggedIn"> < </a>

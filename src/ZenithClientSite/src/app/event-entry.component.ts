@@ -12,5 +12,4 @@ import { TokenService } from './token.service';
 export class EventEntryComponent {
     constructor(private tokenService: TokenService) {}
     @Input() entry: EventEntry;
-    //events = this.entry.events;
 }
