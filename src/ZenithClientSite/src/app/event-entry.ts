@@ -10,9 +10,10 @@ export class EventEntry {
     }
 
     allAreInactive(): boolean {
+        let b: boolean = true;
         this.events.forEach(e => {if (e.isActive) {
-            return false;
+            b = false;
         }})
-        return true;
+        return b;
     }
 }
