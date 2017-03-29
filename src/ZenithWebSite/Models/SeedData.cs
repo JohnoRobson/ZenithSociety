@@ -40,205 +40,193 @@ namespace ZenithSociety.Models
         public static void AddEvents(ApplicationDbContext _db) {
             if (!_db.Events.Any()) {
                 IList<Event> events = new List<Event>();
-
-                events.Add(new Event {                    EventFromDate = new DateTime(2016, 02, 12, 10, 0, 0),
-                    EventToDate = new DateTime(2016, 02, 12, 18, 0, 0),
-                    EnteredByUsername = "a",
-                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Go-Karting").FirstOrDefault().ActivityId,
-                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Go-Karting").FirstOrDefault(),
-                    CreationDate = new DateTime(2016, 01, 01),
-                    IsActive = false
-                });
-
-                events.Add(new Event {
-                    EventFromDate = new DateTime(2016, 04, 14, 11, 0, 0),
-                    EventToDate = new DateTime(2016, 04, 14, 13, 0, 0),
-                    EnteredByUsername = "a",
-                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Super Smash Bros Melee Tournament").FirstOrDefault().ActivityId,
-                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Super Smash Bros Melee Tournament").FirstOrDefault(),
-                    CreationDate = new DateTime(2016, 02, 01),
-                    IsActive = false
-                });
-
-                events.Add(new Event {
-                    EventFromDate = new DateTime(2016, 07, 17, 13, 0, 0),
-                    EventToDate = new DateTime(2016, 07, 17, 15, 0, 0),
+                events.Add(new Event
+                {
+                    EventFromDate = new DateTime(2017, 03, 20, 13, 0, 0),
+                    EventToDate = new DateTime(2017, 03, 20, 20, 30, 0),
                     EnteredByUsername = "a",
                     ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Tennis").FirstOrDefault().ActivityId,
                     Activity = _db.Activities.Where(x => x.ActivityDescription == "Tennis").FirstOrDefault(),
-                    CreationDate = new DateTime(2016, 03, 10),
-                    IsActive = false
-                });
-
-                events.Add(new Event {
-                    EventFromDate = new DateTime(2017, 02, 4, 15, 0, 0),
-                    EventToDate = new DateTime(2017, 02, 4, 18, 0, 0),
-                    EnteredByUsername = "a",
-                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault().ActivityId,
-                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault(),
-                    CreationDate = new DateTime(2017, 01, 11),
+                    CreationDate = new DateTime(2017, 03, 18),
                     IsActive = true
                 });
 
-                events.Add(new Event {
-                    EventFromDate = new DateTime(2017, 02, 5, 15, 0, 0),
-                    EventToDate = new DateTime(2017, 02, 5, 18, 0, 0),
+                events.Add(new Event
+                {
+                    EventFromDate = new DateTime(2017, 03, 21, 13, 0, 0),
+                    EventToDate = new DateTime(2017, 03, 21, 18, 0, 0),
                     EnteredByUsername = "a",
-                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault().ActivityId,
-                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault(),
-                    CreationDate = new DateTime(2017, 01, 11),
+                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Go-Karting").FirstOrDefault().ActivityId,
+                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Go-Karting").FirstOrDefault(),
+                    CreationDate = new DateTime(2017, 03, 18),
                     IsActive = true
                 });
 
-                events.Add(new Event {
-                    EventFromDate = new DateTime(2017, 02, 6, 15, 0, 0),
-                    EventToDate = new DateTime(2017, 02, 6, 18, 0, 0),
+                events.Add(new Event
+                {
+                    EventFromDate = new DateTime(2017, 03, 22, 14, 0, 0),
+                    EventToDate = new DateTime(2017, 03, 23, 18, 0, 0),
                     EnteredByUsername = "a",
-                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault().ActivityId,
-                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault(),
-                    CreationDate = new DateTime(2017, 01, 11),
+                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Super Smash Bros Melee Tournament").FirstOrDefault().ActivityId,
+                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Super Smash Bros Melee Tournament").FirstOrDefault(),
+                    CreationDate = new DateTime(2017, 03, 18),
                     IsActive = true
                 });
 
-                events.Add(new Event {
-                    EventFromDate = new DateTime(2017, 02, 7, 15, 0, 0),
-                    EventToDate = new DateTime(2017, 02, 7, 18, 0, 0),
+                events.Add(new Event
+                {
+                    EventFromDate = new DateTime(2017, 03, 24, 14, 0, 0),
+                    EventToDate = new DateTime(2017, 03, 24, 16, 30, 0),
                     EnteredByUsername = "a",
                     ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault().ActivityId,
                     Activity = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault(),
-                    CreationDate = new DateTime(2017, 01, 11),
+                    CreationDate = new DateTime(2017, 03, 18),
                     IsActive = true
                 });
 
-                events.Add(new Event {
-                    EventFromDate = new DateTime(2017, 02, 8, 15, 0, 0),
-                    EventToDate = new DateTime(2017, 02, 8, 18, 0, 0),
+                events.Add(new Event
+                {
+                    EventFromDate = new DateTime(2017, 03, 27, 13, 0, 0),
+                    EventToDate = new DateTime(2017, 03, 27, 20, 30, 0),
                     EnteredByUsername = "a",
-                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault().ActivityId,
-                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault(),
-                    CreationDate = new DateTime(2017, 01, 11),
+                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Tennis").FirstOrDefault().ActivityId,
+                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Tennis").FirstOrDefault(),
+                    CreationDate = new DateTime(2017, 03, 26),
                     IsActive = true
                 });
 
-                events.Add(new Event {
-                    EventFromDate = new DateTime(2017, 02, 09, 13, 0, 0),
-                    EventToDate = new DateTime(2017, 02, 09, 15, 30, 0),
+                events.Add(new Event
+                {
+                    EventFromDate = new DateTime(2017, 03, 28, 13, 0, 0),
+                    EventToDate = new DateTime(2017, 03, 28, 20, 30, 0),
                     EnteredByUsername = "a",
-                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault().ActivityId,
-                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault(),
-                    CreationDate = new DateTime(2016, 12, 22),
+                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Polo").FirstOrDefault().ActivityId,
+                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Polo").FirstOrDefault(),
+                    CreationDate = new DateTime(2017, 03, 26),
                     IsActive = true
                 });
 
-                events.Add(new Event {
-                    EventFromDate = new DateTime(2017, 02, 10, 10, 0, 0),
-                    EventToDate = new DateTime(2017, 02, 10, 15, 0, 0),
+                events.Add(new Event
+                {
+                    EventFromDate = new DateTime(2017, 03, 30, 13, 0, 0),
+                    EventToDate = new DateTime(2017, 04, 30, 20, 30, 0),
                     EnteredByUsername = "a",
                     ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Water Polo").FirstOrDefault().ActivityId,
                     Activity = _db.Activities.Where(x => x.ActivityDescription == "Water Polo").FirstOrDefault(),
-                    CreationDate = new DateTime(2017, 01, 11),
+                    CreationDate = new DateTime(2017, 03, 26),
                     IsActive = true
                 });
 
-                events.Add(new Event {
-                    EventFromDate = new DateTime(2017, 02, 10, 15, 0, 0),
-                    EventToDate = new DateTime(2017, 02, 10, 18, 0, 0),
+                events.Add(new Event
+                {
+                    EventFromDate = new DateTime(2017, 03, 31, 14, 0, 0),
+                    EventToDate = new DateTime(2017, 03, 31, 16, 30, 0),
                     EnteredByUsername = "a",
                     ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault().ActivityId,
                     Activity = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault(),
-                    CreationDate = new DateTime(2017, 01, 11),
+                    CreationDate = new DateTime(2017, 03, 26),
                     IsActive = true
                 });
 
-                events.Add(new Event {
-                    EventFromDate = new DateTime(2017, 02, 11, 15, 0, 0),
-                    EventToDate = new DateTime(2017, 02, 11, 18, 0, 0),
+                events.Add(new Event
+                {
+                    EventFromDate = new DateTime(2017, 04, 3, 13, 0, 0),
+                    EventToDate = new DateTime(2017, 04, 3, 18, 0, 0),
                     EnteredByUsername = "a",
-                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault().ActivityId,
-                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault(),
-                    CreationDate = new DateTime(2017, 01, 11),
+                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Go-Karting").FirstOrDefault().ActivityId,
+                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Go-Karting").FirstOrDefault(),
+                    CreationDate = new DateTime(2017, 04, 1),
                     IsActive = true
                 });
 
-                events.Add(new Event {
-                    EventFromDate = new DateTime(2017, 02, 12, 15, 0, 0),
-                    EventToDate = new DateTime(2017, 02, 12, 18, 0, 0),
+                events.Add(new Event
+                {
+                    EventFromDate = new DateTime(2017, 04, 4, 14, 0, 0),
+                    EventToDate = new DateTime(2017, 04, 6, 18, 0, 0),
                     EnteredByUsername = "a",
-                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault().ActivityId,
-                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault(),
-                    CreationDate = new DateTime(2017, 01, 11),
+                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Super Smash Bros Melee Tournament").FirstOrDefault().ActivityId,
+                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Super Smash Bros Melee Tournament").FirstOrDefault(),
+                    CreationDate = new DateTime(2017, 04, 1),
                     IsActive = true
                 });
 
-                events.Add(new Event {
-                    EventFromDate = new DateTime(2017, 02, 13, 15, 0, 0),
-                    EventToDate = new DateTime(2017, 02, 13, 18, 0, 0),
+                events.Add(new Event
+                {
+                    EventFromDate = new DateTime(2017, 04, 5, 13, 0, 0),
+                    EventToDate = new DateTime(2017, 04, 5, 20, 30, 0),
                     EnteredByUsername = "a",
-                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault().ActivityId,
-                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault(),
-                    CreationDate = new DateTime(2017, 01, 11),
+                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Tennis").FirstOrDefault().ActivityId,
+                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Tennis").FirstOrDefault(),
+                    CreationDate = new DateTime(2017, 04, 1),
                     IsActive = true
                 });
 
-                events.Add(new Event {
-                    EventFromDate = new DateTime(2017, 02, 14, 15, 0, 0),
-                    EventToDate = new DateTime(2017, 02, 14, 18, 0, 0),
+                events.Add(new Event
+                {
+                    EventFromDate = new DateTime(2017, 04, 7, 14, 0, 0),
+                    EventToDate = new DateTime(2017, 04, 7, 16, 30, 0),
                     EnteredByUsername = "a",
                     ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault().ActivityId,
                     Activity = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault(),
-                    CreationDate = new DateTime(2017, 01, 11),
+                    CreationDate = new DateTime(2017, 04, 1),
                     IsActive = true
                 });
 
-                events.Add(new Event {
-                    EventFromDate = new DateTime(2017, 02, 15, 15, 0, 0),
-                    EventToDate = new DateTime(2017, 02, 15, 18, 0, 0),
+                events.Add(new Event
+                {
+                    EventFromDate = new DateTime(2017, 04, 10, 13, 0, 0),
+                    EventToDate = new DateTime(2017, 04, 10, 20, 30, 0),
                     EnteredByUsername = "a",
-                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault().ActivityId,
-                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault(),
-                    CreationDate = new DateTime(2017, 01, 11),
+                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Polo").FirstOrDefault().ActivityId,
+                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Polo").FirstOrDefault(),
+                    CreationDate = new DateTime(2017, 04, 8),
                     IsActive = true
                 });
 
-                events.Add(new Event {
-                    EventFromDate = new DateTime(2017, 02, 16, 15, 0, 0),
-                    EventToDate = new DateTime(2017, 02, 16, 18, 0, 0),
+                events.Add(new Event
+                {
+                    EventFromDate = new DateTime(2017, 04, 10, 13, 0, 0),
+                    EventToDate = new DateTime(2017, 04, 10, 20, 30, 0),
                     EnteredByUsername = "a",
-                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault().ActivityId,
-                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault(),
-                    CreationDate = new DateTime(2017, 01, 11),
+                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Water Polo").FirstOrDefault().ActivityId,
+                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Water Polo").FirstOrDefault(),
+                    CreationDate = new DateTime(2017, 04, 8),
                     IsActive = true
                 });
 
-                events.Add(new Event {
-                    EventFromDate = new DateTime(2017, 02, 17, 15, 0, 0),
-                    EventToDate = new DateTime(2017, 02, 17, 18, 0, 0),
+                events.Add(new Event
+                {
+                    EventFromDate = new DateTime(2017, 04, 12, 13, 0, 0),
+                    EventToDate = new DateTime(2017, 04, 12, 20, 30, 0),
                     EnteredByUsername = "a",
-                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault().ActivityId,
-                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault(),
-                    CreationDate = new DateTime(2017, 01, 11),
+                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Tennis").FirstOrDefault().ActivityId,
+                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Tennis").FirstOrDefault(),
+                    CreationDate = new DateTime(2017, 04, 8),
                     IsActive = true
                 });
 
-                events.Add(new Event {
-                    EventFromDate = new DateTime(2017, 02, 18, 15, 0, 0),
-                    EventToDate = new DateTime(2017, 02, 18, 18, 0, 0),
+                events.Add(new Event
+                {
+                    EventFromDate = new DateTime(2017, 04, 13, 13, 0, 0),
+                    EventToDate = new DateTime(2017, 04, 13, 18, 0, 0),
                     EnteredByUsername = "a",
-                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault().ActivityId,
-                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault(),
-                    CreationDate = new DateTime(2017, 01, 11),
+                    ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Go-Karting").FirstOrDefault().ActivityId,
+                    Activity = _db.Activities.Where(x => x.ActivityDescription == "Go-Karting").FirstOrDefault(),
+                    CreationDate = new DateTime(2017, 04, 8),
                     IsActive = true
                 });
 
-                events.Add(new Event {
-                    EventFromDate = new DateTime(2017, 02, 19, 15, 0, 0),
-                    EventToDate = new DateTime(2017, 02, 19, 18, 0, 0),
+                events.Add(new Event
+                {
+                    EventFromDate = new DateTime(2017, 04, 14, 14, 0, 0),
+                    EventToDate = new DateTime(2017, 04, 14, 16, 30, 0),
                     EnteredByUsername = "a",
                     ActivityId = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault().ActivityId,
                     Activity = _db.Activities.Where(x => x.ActivityDescription == "Competitive Vaping").FirstOrDefault(),
-                    CreationDate = new DateTime(2017, 01, 11),
+                    CreationDate = new DateTime(2017, 04, 8),
                     IsActive = true
                 });
+
                 foreach (Event eve in events) {
                     _db.Add(eve);
                 }
