@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate } from '@angular/router';
+
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
-export class TokenService {
+export class TokenService implements CanActivate {
     TOKEN_NAME: string = "zenithToken";
 
     getToken(): string {
@@ -25,4 +28,11 @@ export class TokenService {
     logOut(): void {
         localStorage.setItem(this.TOKEN_NAME, "");
     }
+
+    canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean>|Promise<boolean>|boolean {
+    return this.isLoggedIn();
+  }
 }

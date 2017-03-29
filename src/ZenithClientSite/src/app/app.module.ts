@@ -39,7 +39,7 @@ import { ActivityService } from './activity.service';
       path: 'register', component: RegisterComponent
     },
     {
-      path: 'events/:id', component: EventViewComponent
+      path: 'events/:id', component: EventViewComponent,  canActivate: [TokenService]
     }
   ])
   ],
