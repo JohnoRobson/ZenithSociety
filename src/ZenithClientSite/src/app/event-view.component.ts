@@ -89,8 +89,6 @@ export class EventViewComponent implements OnInit {
 
     ngOnInit(): void {
         this.isLoggedIn = this.tokenService.isLoggedIn();
-        console.log("event view init");
-        console.log(this.isLoggedIn);
         this.route.params
         .subscribe(param => {
             this.id = param['id'];

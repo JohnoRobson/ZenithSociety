@@ -9,7 +9,6 @@ import { TokenService } from './token.service';
 
 export class LoginComponent {
   private URL = 'http://zenith-society-nj-core.azurewebsites.net/connect/token/';
-  //private URL = 'http://localhost:5000/connect/token';
 
   constructor(private http: Http, private tokenService: TokenService) {}
 

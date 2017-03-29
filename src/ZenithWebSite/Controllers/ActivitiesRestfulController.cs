@@ -12,8 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace ZenithSociety.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Activities")]
-    [Authorize(Roles = "Admin")]    
+    [Route("api/Activities")] 
     public class ActivitiesRestfulController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -51,6 +50,7 @@ namespace ZenithSociety.Controllers
 
         // PUT: api/Activities/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PutActivity([FromRoute] int id, [FromBody] Activity activity)
         {
             if (!ModelState.IsValid)
@@ -86,6 +86,7 @@ namespace ZenithSociety.Controllers
 
         // POST: api/Activities
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PostActivity([FromBody] Activity activity)
         {
             if (!ModelState.IsValid)
@@ -115,6 +116,7 @@ namespace ZenithSociety.Controllers
 
         // DELETE: api/Activities/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteActivity([FromRoute] int id)
         {
             if (!ModelState.IsValid)
