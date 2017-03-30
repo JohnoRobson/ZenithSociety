@@ -12,7 +12,8 @@ using Microsoft.AspNetCore.Authorization;
 namespace ZenithSociety.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Activities")] 
+    [Route("api/Activities")]
+    [Authorize(Roles = "Member")]
     public class ActivitiesRestfulController : Controller
     {
         private readonly ApplicationDbContext _context;
