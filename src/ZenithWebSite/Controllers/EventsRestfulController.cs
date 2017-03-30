@@ -15,7 +15,6 @@ namespace ZenithSociety.Controllers
     [Produces("application/json")]
     [Route("api/Events")]
     [EnableCors("AllowAllOrigins")]
-    //[Authorize(Roles = "Admin")]
     public class EventsRestfulController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -25,15 +24,35 @@ namespace ZenithSociety.Controllers
             _context = context;
         }
 
+        private IEnumerable<Event> getActivities(List<Event> list) {
+            foreach (var e in list) {
+                e.Activity = _context.Activities.FirstOrDefault(a => a.ActivityId == e.ActivityId);
+            }
+            return list;
+        }
+
+        [HttpGet("{anon}")]
+        public IEnumerable<Event> GetAnonEvents() {
+            DateTime date = DateTime.Today;
+            DateTime start = date.Date.AddDays(-(int)date.DayOfWeek + 1);
+            DateTime end = start.AddDays(7);
+            var events = _context.Events.Where(e => e.EventFromDate >= start
+            & e.EventFromDate < end
+            & e.IsActive == true).ToList();
+            return getActivities(events);
+        }
+
         // GET: api/Events
         [HttpGet]
+        [Authorize(Roles = "Member")]
         public IEnumerable<Event> GetEvents()
         {
-            return _context.Events;
+            return getActivities(_context.Events.ToList());
         }
 
         // GET: api/Events/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Member")]
         public async Task<IActionResult> GetEvent([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -53,6 +72,7 @@ namespace ZenithSociety.Controllers
 
         // PUT: api/Events/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "Member")]
         public async Task<IActionResult> PutEvent([FromRoute] int id, [FromBody] Event @event)
         {
             if (!ModelState.IsValid)
@@ -88,6 +108,7 @@ namespace ZenithSociety.Controllers
 
         // POST: api/Events
         [HttpPost]
+        [Authorize(Roles = "Member")]
         public async Task<IActionResult> PostEvent([FromBody] Event @event)
         {
             if (!ModelState.IsValid)
@@ -117,6 +138,7 @@ namespace ZenithSociety.Controllers
 
         // DELETE: api/Events/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteEvent([FromRoute] int id)
         {
             if (!ModelState.IsValid)
