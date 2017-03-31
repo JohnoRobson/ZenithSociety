@@ -39,7 +39,7 @@ namespace ZenithSociety.Controllers
             var events = _context.Events.Where(e => e.EventFromDate >= start
             & e.EventFromDate < end
             & e.IsActive == true).ToList();
-            return getActivities(events);
+            return getActivities(events).OrderBy(e => e.EventFromDate);
         }
 
         // GET: api/Events
@@ -47,7 +47,7 @@ namespace ZenithSociety.Controllers
         [Authorize(Roles = "Member")]
         public IEnumerable<Event> GetEvents()
         {
-            return getActivities(_context.Events.ToList());
+            return getActivities(_context.Events.ToList()).OrderBy(e => e.EventFromDate);
         }
 
         // GET: api/Events/5
