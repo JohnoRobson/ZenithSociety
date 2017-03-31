@@ -17,12 +17,11 @@ export class EventService {
 
     getEvents(): Promise<Event[]> {
         let headers: Headers = new Headers();
-        //headers.append('Authorization', 'Bearer ' + this.tokenService.getToken());
-        //headers.append('content-type', 'application/json');
+        headers.append('Authorization', 'Bearer ' + this.tokenService.getToken());
+        headers.append('content-type', 'application/json');
 
         let options = new RequestOptions({headers: headers});
 
-        //this.http.get(this.tokenService.isLoggedIn() ? this.URL : this.URL_ANON, options).toPromise().then(response => console.log(response));
         let events: Promise<Event[]> = this.http.get(this.tokenService.isLoggedIn() ? this.URL : this.URL_ANON, options)
                .toPromise()
                .then(response => response.json())
