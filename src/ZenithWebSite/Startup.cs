@@ -114,7 +114,7 @@ namespace ZenithSociety
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseCors("AllowAll");
+            app.UseCors("AllowAllOrigins");
             /*app.UseCors(builder => builder.AllowAnyOrigin()
                                 .AllowAnyHeader()
                                 .AllowCredentials());*/

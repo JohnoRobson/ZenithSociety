@@ -31,7 +31,6 @@ export class EventViewComponent implements OnInit {
         this.dates = [];
         this.convertStringsToDates();
         events.forEach(event => {
-            console.log(event);
             if (!this.dates.some(d => this.convertDate(d) === this.convertDate(event.eventFromDate))) {
                 this.dates.push(event.eventFromDate);
             }
