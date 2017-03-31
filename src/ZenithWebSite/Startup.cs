@@ -84,9 +84,9 @@ namespace ZenithSociety
             });
 
             services.AddMvc();
-            services.Configure<MvcOptions>(options => {
+            /*services.Configure<MvcOptions>(options => {
                 options.Filters.Add(new CorsAuthorizationFilterFactory("AllowAllOrigins"));
-            });
+            });*/
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins",

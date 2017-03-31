@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { Event } from './event';
@@ -17,15 +17,13 @@ export class EventService {
 
     getEvents(): Promise<Event[]> {
         let headers: Headers = new Headers();
-        headers.append('Access-Control-Allow-Headers', 'Content-Type');
-        headers.append('Access-Control-Allow-Headers', 'X-Auth-Token');
-        headers.append('Access-Control-Allow-Headers', 'Origin');
-        headers.append('Access-Control-Allow-Headers', 'Authorization');
         headers.append('Authorization', 'Bearer ' + this.tokenService.getToken());
-        headers.append('Accept', 'application/json');
-        headers.append("Content-Type", "application/x-www-form-urlencoded");
+
+        let options = new RequestOptions({headers: headers, withCredentials: true});
+
+        console.log('Bearer ' + this.tokenService.getToken());
         this.http.get(this.tokenService.isLoggedIn() ? this.URL : this.URL_ANON, headers).toPromise().then(response => console.log(response));
-        let events: Promise<Event[]> = this.http.get(this.tokenService.isLoggedIn() ? this.URL : this.URL_ANON, headers)
+        let events: Promise<Event[]> = this.http.get(this.tokenService.isLoggedIn() ? this.URL : this.URL_ANON, options)
                .toPromise()
                .then(response => response.json())
                .catch(this.handleError);
