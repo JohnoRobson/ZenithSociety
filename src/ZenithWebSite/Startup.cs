@@ -14,6 +14,8 @@ using ZenithSociety.Models;
 using ZenithSociety.Services;
 using Microsoft.DotNet.InternalAbstractions;
 using AspNet.Security.OpenIdConnect.Primitives;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace ZenithSociety
 {
@@ -82,6 +84,9 @@ namespace ZenithSociety
             });
 
             services.AddMvc();
+            services.Configure<MvcOptions>(options => {
+                options.Filters.Add(new CorsAuthorizationFilterFactory("AllowAllOrigins"));
+            });
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins",
