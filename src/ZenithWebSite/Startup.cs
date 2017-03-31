@@ -120,9 +120,10 @@ namespace ZenithSociety
             }
 
             //app.UseCors("AllowAllOrigins");
-            /*app.UseCors(builder => builder.AllowAnyOrigin()
+            app.UseCors(builder => builder.AllowAnyOrigin()
                                 .AllowAnyHeader()
-                                .AllowCredentials());*/
+                                .AllowCredentials()
+                                .AllowAnyMethod());
 
             app.UseStaticFiles();
 
