@@ -16,18 +16,29 @@ export class EventService {
     constructor(private http: Http, private tokenService: TokenService) { }
 
     getEvents(): Promise<Event[]> {
-        let header: Headers = new Headers();
-        header.set("Authentication", "Bearer " + this.tokenService.getToken);
-        let events: Promise<Event[]> = this.http.get(this.tokenService.isLoggedIn ? this.URL : this.URL_ANON, header)
+        let headers: Headers = new Headers();
+        headers.append('Access-Control-Allow-Headers', 'Content-Type');
+        headers.append('Access-Control-Allow-Headers', 'X-Auth-Token');
+        headers.append('Access-Control-Allow-Headers', 'Origin');
+        headers.append('Access-Control-Allow-Headers', 'Authorization');
+        headers.append('Authorization', 'Bearer ' + this.tokenService.getToken());
+        headers.append('Accept', 'application/json');
+        headers.append("Content-Type", "application/x-www-form-urlencoded");
+        this.http.get(this.tokenService.isLoggedIn() ? this.URL : this.URL_ANON, headers).toPromise().then(response => console.log(response));
+        let events: Promise<Event[]> = this.http.get(this.tokenService.isLoggedIn() ? this.URL : this.URL_ANON, headers)
                .toPromise()
-               .then(response => response.json() as Event[])
+               .then(response => response.json())
                .catch(this.handleError);
-
         if (events == undefined) {
             
         }
 
         return events;
+    }
+
+    private convertToEvents(input: JSON): Event[] {
+        console.log(input);
+        return null;
     }
 
     private handleError(error: any): Promise<any> {
