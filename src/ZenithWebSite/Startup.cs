@@ -120,7 +120,7 @@ namespace ZenithSociety
             }
 
             //app.UseCors("AllowAllOrigins");
-            app.UseCors(builder => builder.WithOrigins("http://localhost:4200")
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200/events")
                                 .AllowAnyHeader()
                                 .AllowCredentials()
                                 .AllowAnyMethod());
