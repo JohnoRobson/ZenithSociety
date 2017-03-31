@@ -18,9 +18,9 @@ export class EventService {
     getEvents(): Promise<Event[]> {
         let headers: Headers = new Headers();
         headers.append('Authorization', 'Bearer ' + this.tokenService.getToken());
-        //headers.append('content-type', 'application/x-www-form-urlencoded');
+        headers.append('content-type', 'application/json');
 
-        let options = new RequestOptions({headers: headers, withCredentials: true});
+        //let options = new RequestOptions({headers: headers, withCredentials : true, method: 'GET'});
         //this.http.get(this.tokenService.isLoggedIn() ? this.URL : this.URL_ANON, headers).toPromise().then(response => console.log(response));
         let events: Promise<Event[]> = this.http.get(this.tokenService.isLoggedIn() ? this.URL : this.URL_ANON, headers)
                .toPromise()
