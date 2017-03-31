@@ -1,5 +1,0 @@
-<tr><p>{{entry.date | date: 'EEEE MMMM d, y'}}</p></tr>
-<tr *ngFor="let event of entry.events">
-    <td><p>{{event.activity.activityDescription}}</p></td>
-    <td [hidden]="!tokenService.isLoggedIn() && !event.isActive"><p>{{event.eventFromDate | date: 'hh:mm:a'}} - {{event.eventToDate | date: 'hh:mm:a'}}</p></td>
-</tr>

@@ -1,9 +1,0 @@
-<div class="container">
-    <form class="form-account" (ngSubmit)="onSubmit()" [hidden]="tokenService.isLoggedIn()">
-        <h1 class="form-account-heading text-muted">Login</h1>
-        <input type="text" class="form-control" [(ngModel)]="username" placeholder="Enter Username" name="username" required="" autofocus="" />
-        <input type="password" class="form-control" [(ngModel)]="password" placeholder="Enter Password" name="password" required="" />
-        <button class="btn btn-lg btn-danger btn-block" type="submit">Login</button>
-    </form>
-    <h1 class="form-account-heading" [hidden]="!tokenService.isLoggedIn()">You are logged in</h1>
-</div>
