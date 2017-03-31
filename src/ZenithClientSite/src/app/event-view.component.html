@@ -1,7 +1,12 @@
-<table>
-    <tr *ngFor="let entry of entries">
-        <event-entry [entry]="entry" [hidden]="entry.allAreInactive() && !isLoggedIn"></event-entry>
-    </tr>
-</table>
-<a href="/events/{{nextId}}" routerLinkActive="active" [hidden]="!isLoggedIn"> < </a>
-<a href="/events/{{previousId}}" routerLinkActive="active" [hidden]="!isLoggedIn"> > </a>
+<div class="container">
+    <h1 class="form-account-heading">Events</h1>    
+    <table class="table table-hover table-bordered">
+        <tr *ngFor="let entry of entries">
+            <event-entry [entry]="entry" [hidden]="entry.allAreInactive() && !isLoggedIn"></event-entry>
+        </tr>
+    </table>
+    <div class="col-md-12 text-center">
+        <a class="btn btn-lg btn-danger" role="button" href="/events/{{nextId}}" routerLinkActive="active" [hidden]="!isLoggedIn"> < </a>
+        <a class="btn btn-lg btn-danger" role="button" href="/events/{{previousId}}" routerLinkActive="active" [hidden]="!isLoggedIn"> > </a>
+    </div>
+</div>
