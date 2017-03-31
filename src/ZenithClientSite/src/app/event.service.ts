@@ -4,26 +4,24 @@ import 'rxjs/add/operator/toPromise';
 
 import { Event } from './event';
 import { Activity } from './activity';
-import { ActivityService } from './activity.service';
+import { TokenService } from './token.service';
 
 @Injectable()
 export class EventService {
 
     private URL = 'http://zenith-society-nj-core.azurewebsites.net/api/events';  // URL to web api
+    private URL_ANON = 'http://zenith-society-nj-core.azurewebsites.net/api/events/anon'; 
     private activities: Map<number, Activity> = new Map<number, Activity>();
 
-    constructor(private http: Http, private activityService: ActivityService) { }
+    constructor(private http: Http, private tokenService: TokenService) { }
 
     getEvents(): Promise<Event[]> {
-        let events: Promise<Event[]> = this.http.get(this.URL)
+        let header: Headers = new Headers();
+        header.set("Authentication", "Bearer " + this.tokenService.getToken);
+        let events: Promise<Event[]> = this.http.get(this.tokenService.isLoggedIn ? this.URL : this.URL_ANON, header)
                .toPromise()
                .then(response => response.json() as Event[])
                .catch(this.handleError);
-
-        this.activityService.getActivities().then(a => a.forEach(act => {this.activities.set(act.activityId, act)}))
-            .then(q => events.then(events => events.forEach(e => {
-                e.activityName = this.activities.get(e.activityId).activityDescription;
-            })));
 
         if (events == undefined) {
             

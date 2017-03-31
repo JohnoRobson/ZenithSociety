@@ -1,10 +1,12 @@
+import { Activity } from './activity';
+
 export class Event {
     eventId: number;
     eventFromDate: Date;
     eventToDate: Date;
     enteredByUserName: string;
     activityId: number;
-    activityName: string;
+    activity: Activity;
     creationDate: Date;
     isActive: boolean;
 }

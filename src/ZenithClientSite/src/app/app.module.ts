@@ -11,7 +11,6 @@ import { EventEntryComponent } from './event-entry.component';
 import { LoginComponent } from './login.component';
 import { RegisterComponent } from './register.component';
 import { TokenService } from './token.service';
-import { ActivityService } from './activity.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +42,7 @@ import { ActivityService } from './activity.service';
     }
   ])
   ],
-  providers: [ EventService, TokenService, ActivityService ],
+  providers: [ EventService, TokenService ],
   bootstrap: [ AppComponent ],
 })
 
