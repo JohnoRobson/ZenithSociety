@@ -86,7 +86,7 @@ namespace ZenithSociety
             services.AddMvc();
             /*services.Configure<MvcOptions>(options => {
                 options.Filters.Add(new CorsAuthorizationFilterFactory("AllowAllOrigins"));
-            });*/
+            });
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins",
@@ -94,7 +94,7 @@ namespace ZenithSociety
                                 .AllowAnyHeader()
                                 .AllowCredentials()
                                 .AllowAnyMethod());
-            });
+            });*/
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
