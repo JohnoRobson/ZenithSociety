@@ -5,28 +5,51 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ZenithSociety.Models;
 using ZenithSociety.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace ZenithSociety.Controllers {
     public class HomeController : Controller {
 
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private ApplicationUser _user;
 
-        public HomeController(ApplicationDbContext context) {
+        public HomeController(ApplicationDbContext context, UserManager<ApplicationUser> userManager) {
             _context = context;
+            _userManager = userManager;
+        }
+
+        private async Task getUser() {
+            _user = await _userManager.GetUserAsync(HttpContext.User);
         }
 
         private List<Event> getWeekEvents(DateTime date) {
             DateTime start = date.Date.AddDays(-(int)date.DayOfWeek + 1);
             DateTime end = start.AddDays(7);
             var events = _context.Events.Where(e => e.EventFromDate >= start
-            & e.EventFromDate < end
-            & e.IsActive == true).ToList();
+            & e.EventFromDate < end).ToList();
+            Task q = getUser();
+            q.Wait();
+            
+            if (_user?.Id == null) {
+                events.RemoveAll(e => e.IsActive == false);
+            }
+
             return events;
         }
 
-        public IActionResult Index()
+        private IEnumerable<Event> getActivities(List<Event> list) {
+            foreach (var e in list) {
+                e.Activity = _context.Activities.FirstOrDefault(a => a.ActivityId == e.ActivityId);
+            }
+            return list;
+        }
+
+        public async Task<ActionResult> Index()
         {
-            return View(getWeekEvents(DateTime.Today));
+            return View(getActivities(getWeekEvents(DateTime.Today)));
         }
 
         public IActionResult About()

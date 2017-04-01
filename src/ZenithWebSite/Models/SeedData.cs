@@ -263,21 +263,6 @@ namespace ZenithSociety.Models
             ApplicationUser admin  = new ApplicationUser() { Email = "a@a.a", UserName = "a", FirstName = "a", LastName = "a" };
             ApplicationUser member = new ApplicationUser() { Email = "m@m.m", UserName = "m", FirstName = "m", LastName = "m" };
 
-            /*List<ApplicationUser> list = new List<ApplicationUser>();
-            list.Add(admin);
-            list.Add(member);
-            
-            foreach (var user in list) {
-                if (!_db.Users.Any(u => u.UserName == user.UserName)) {*/
-                    /*var password = new PasswordHasher<ApplicationUser>();
-                    var hashed = password.HashPassword(user, "password");
-                    user.PasswordHash = hashed;
-                    _db.Add(user);*/
-                    /*userManager.CreateAsync(user, "password");
-                    userManager.AddToRoleAsync(_db.Users.Where(u => u.UserName == "a").FirstOrDefault(), "Admin");
-                }
-            }*/
-
             await _userManager.CreateAsync(admin, "P@$$w0rd");
             await _userManager.CreateAsync(member, "P@$$w0rd");
             _db.SaveChanges();

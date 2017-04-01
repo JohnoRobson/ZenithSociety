@@ -11,15 +11,19 @@ namespace ZenithSociety.Models
     public class ApplicationUser : IdentityUser
     {
         [Required]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [Required]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         [Required]
+        [Display(Name = "Username")]
         public override string UserName { get; set; }
 
         [Required]
+        [Display(Name = "Email")]
         public override string Email { get; set; }
     }
 }

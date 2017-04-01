@@ -30,7 +30,7 @@ namespace ZenithSociety.Models {
         [Display(Name = "Created By")]
         public string EnteredByUsername { get; set; }
 
-        [Display(Name = "ActivityId")]
+        [Display(Name = "Activity")]
         [Required]
         public int ActivityId { get; set; }
 
