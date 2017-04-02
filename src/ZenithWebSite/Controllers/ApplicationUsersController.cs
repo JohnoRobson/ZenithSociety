@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ZenithSociety.Data;
 using ZenithSociety.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ZenithSociety.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ApplicationUsersController : Controller
     {
         private readonly ApplicationDbContext _context;
