@@ -29,7 +29,7 @@ namespace ZenithSociety.Controllers {
             DateTime start = date.Date.AddDays(-(int)date.DayOfWeek + 1);
             DateTime end = start.AddDays(7);
             var events = _context.Events.Where(e => e.EventFromDate >= start
-            & e.EventFromDate < end).ToList();
+            & e.EventFromDate < end).OrderBy(e => e.EventFromDate).ToList();
             Task q = getUser();
             q.Wait();
             
